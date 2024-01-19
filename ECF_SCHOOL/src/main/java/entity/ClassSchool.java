@@ -3,6 +3,7 @@ package entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,8 +25,8 @@ public class ClassSchool {
     @JoinColumn(name = "d_id", nullable = false)
     private Department department;
 
-    @ManyToMany(mappedBy = "classSchools")
-    private List<Teacher> teachers;
+    @ManyToMany(mappedBy = "classSchools", cascade = CascadeType.REMOVE)
+    private List<Teacher> teachers = new ArrayList<>();
 
     @OneToMany(mappedBy = "aClassSchool", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Student> students;
